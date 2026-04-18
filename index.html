@@ -147,30 +147,38 @@
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--spacing-xl);
-      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-lg);
       gap: var(--spacing-lg);
+      border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+      padding-bottom: var(--spacing-md);
     }
 
     .logo {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--color-text);
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-subtitle {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      margin-top: 4px;
+      font-weight: 400;
     }
 
     .logo-icon {
-      font-size: 32px;
+      font-size: 28px;
       animation: float 3s ease-in-out infinite;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
     }
 
     .header-info {
@@ -178,104 +186,133 @@
       flex-direction: column;
       align-items: flex-end;
       gap: var(--spacing-xs);
+      text-align: right;
     }
 
     .personal-best {
-      color: var(--color-text-tertiary);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: var(--color-text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .personal-best-icon {
+      font-size: 16px;
+      animation: pulse-icon 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-icon {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .personal-best-icon {
+      font-size: 16px;
     }
 
     .personal-best-value {
       font-weight: 700;
-      font-size: 20px;
-      background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 16px;
+      color: var(--color-text);
     }
 
-    /* ===== Stats Section ===== */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    /* ===== Stats & Controls Section ===== */
+    .stats-controls-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: var(--spacing-md);
-      margin-bottom: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    }
+
+    /* ===== Stats Section (Horizontal) ===== */
+    .stats {
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .stat-item {
-      text-align: center;
-      padding: var(--spacing-md);
-      background: rgba(99, 102, 241, 0.05); /* Very light blue background */
-      border: 1px solid rgba(99, 102, 241, 0.1);
-      border-radius: var(--radius-md);
-      transition: var(--transition);
-    }
-
-    .stat-item:hover {
-      background: rgba(99, 102, 241, 0.1);
-      border-color: rgba(99, 102, 241, 0.2);
-      transform: translateY(-2px);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
     }
 
     .stat-label {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--color-text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: var(--spacing-xs);
-      font-weight: 600;
+      font-weight: 500;
+      text-transform: capitalize;
     }
 
     .stat-value {
-      font-size: 36px;
+      font-size: 22px;
       font-weight: 700;
-      color: var(--color-primary-light);
-      text-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+      color: var(--color-primary);
+      font-family: 'Sora', monospace;
     }
 
-    /* ===== Controls ===== */
+    .stat-value.wpm {
+      color: var(--color-primary);
+    }
+
+    .stat-value.accuracy {
+      color: var(--color-accent);
+    }
+
+    .stat-value.time {
+      color: var(--color-warning);
+    }
+
+    /* ===== Controls (Buttons) ===== */
     .controls {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-lg);
-      margin-bottom: var(--spacing-xl);
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .control-group {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: var(--spacing-sm);
     }
 
     .control-label {
       font-size: 12px;
       color: var(--color-text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
       font-weight: 600;
+      text-transform: capitalize;
+      white-space: nowrap;
     }
 
     .button-group {
       display: flex;
-      gap: var(--spacing-sm);
+      gap: 6px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .btn {
-      padding: 9px 16px;
-      border: 1.5px solid var(--color-border);
+      padding: 7px 14px;
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
       border-radius: var(--radius-sm);
-      background: rgba(99, 102, 241, 0.05);
+      background: transparent;
       color: var(--color-text-secondary);
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      transition: var(--transition);
+      transition: all 0.25s ease;
       white-space: nowrap;
       position: relative;
       overflow: hidden;
+      font-family: 'Sora', sans-serif;
     }
 
     .btn::before {
@@ -285,14 +322,16 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: rgba(99, 102, 241, 0.2); /* Light blue overlay for hover */
-      transition: var(--transition);
+      background: rgba(99, 102, 241, 0.1);
+      transition: all 0.25s ease;
+      z-index: 0;
     }
 
     .btn:hover {
-      border-color: var(--color-primary);
+      border-color: rgba(99, 102, 241, 0.5);
       color: var(--color-text);
       transform: translateY(-1px);
+      background: rgba(99, 102, 241, 0.05);
     }
 
     .btn:hover::before {
@@ -300,24 +339,29 @@
     }
 
     .btn.active {
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+      background: rgba(99, 102, 241, 0.15);
       border-color: var(--color-primary);
-      color: white;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      color: var(--color-primary-light);
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.25);
+      font-weight: 600;
     }
 
     .btn.active::before {
       display: none;
     }
 
+    .btn:active {
+      transform: translateY(0px);
+    }
+
     /* ===== Passage Container ===== */
     .passage-container {
-      background: rgba(15, 15, 15, 0.8);
-      border: 1px solid rgba(99, 102, 241, 0.1);
+      background: transparent;
+      border: none;
       border-radius: var(--radius-md);
-      padding: var(--spacing-lg);
+      padding: var(--spacing-lg) 0;
       margin-bottom: var(--spacing-lg);
-      min-height: 220px;
+      min-height: 240px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -332,21 +376,22 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.02) 100%); /* Faint gradient at bottom */
+      background: transparent;
       pointer-events: none;
     }
 
     .passage {
-      font-size: 18px;
-      line-height: 1.9;
+      font-size: 20px;
+      line-height: 1.8;
       color: var(--color-text-secondary);
       font-weight: 400;
       text-align: center;
       cursor: text;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       position: relative;
       z-index: 2;
       transition: var(--transition);
+      font-family: 'Sora', sans-serif;
     }
 
     .passage:focus {
@@ -355,37 +400,36 @@
 
     .passage span {
       position: relative;
-      display: inline-block;
+      display: inline;
       transition: all 0.05s ease;
-      padding: 0 1px;
     }
 
     .passage span.correct {
       color: var(--color-success);
-      text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+      font-weight: 500;
     }
 
     .passage span.incorrect {
-      color: var(--color-error);
-      background: rgba(239, 68, 68, 0.15);
+      color: var(--color-accent);
+      background: rgba(239, 68, 68, 0.08);
+      padding: 0 2px;
       border-radius: 2px;
-      text-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
     }
 
     .passage span.current {
-      background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent); /* Faint blue glow */
+      color: var(--color-primary);
+      background: rgba(99, 102, 241, 0.15);
       border-bottom: 2px solid var(--color-primary);
       animation: blink 1s infinite;
     }
 
     @keyframes blink {
       0%, 49%, 100% { opacity: 1; }
-      50%, 99% { opacity: 0.6; }
+      50%, 99% { opacity: 0.7; }
     }
 
     .passage span.remaining {
       color: var(--color-text-tertiary);
-      opacity: 0.6;
     }
 
     /* ===== Start Button Container ===== */
@@ -410,45 +454,45 @@
     }
 
     .start-button {
-      padding: 12px 32px;
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-      border: none;
+      padding: 10px 28px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1.5px solid rgba(99, 102, 241, 0.4);
       border-radius: var(--radius-sm);
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 15px;
       cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      transition: all 0.25s ease;
+      box-shadow: none;
       position: relative;
       overflow: hidden;
+      font-family: 'Sora', sans-serif;
     }
 
     .start-button::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.2); /* White ripple effect */
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(99, 102, 241, 0.1);
+      transition: all 0.25s ease;
     }
 
     .start-button:hover::before {
-      width: 300px;
-      height: 300px;
+      left: 0;
     }
 
     .start-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+      border-color: var(--color-primary);
+      color: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
     }
 
     .start-button:active {
-      transform: translateY(-1px);
+      transform: translateY(0px);
     }
 
     .hint {
@@ -543,17 +587,50 @@
     /* ===== Buttons ===== */
     .go-again-button,
     .reset-button {
-      padding: 12px 32px;
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-      border: none;
+      padding: 10px 28px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1.5px solid rgba(99, 102, 241, 0.4);
       border-radius: var(--radius-sm);
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 15px;
       cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      transition: all 0.25s ease;
+      box-shadow: none;
       margin: var(--spacing-sm);
+      font-family: 'Sora', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .go-again-button::before,
+    .reset-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(99, 102, 241, 0.1);
+      transition: all 0.25s ease;
+    }
+
+    .go-again-button:hover::before,
+    .reset-button:hover::before {
+      left: 0;
+    }
+
+    .go-again-button:hover,
+    .reset-button:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .go-again-button:active,
+    .reset-button:active {
+      transform: translateY(0px);
     }
 
     .go-again-button:hover,
@@ -791,47 +868,56 @@
   <div class="container">
     <!-- Header Section -->
     <div class="header">
-      <div class="logo">
-        <span class="logo-icon">⌨️</span>
-        <span>Typing Master</span>
+      <div>
+        <div class="logo">
+          <span class="logo-icon">⌨️</span>
+          <span>Typing Speed Test</span>
+        </div>
+        <div class="logo-subtitle">Type as fast as you can in 60 seconds</div>
       </div>
       <div class="header-info">
-        <div class="personal-best">Personal Best</div>
-        <div class="personal-best-value" id="pbWpm">0 WPM</div>
-      </div>
-    </div>
-
-    <!-- Stats Section -->
-    <div class="stats">
-      <div class="stat-item">
-        <div class="stat-label">WPM</div>
-        <div class="stat-value" id="wpmDisplay">0</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Accuracy</div>
-        <div class="stat-value" id="accuracyDisplay">0%</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Time</div>
-        <div class="stat-value" id="timeDisplay">0:00</div>
-      </div>
-    </div>
-
-    <!-- Controls Section -->
-    <div class="controls">
-      <div class="control-group">
-        <div class="control-label">Difficulty Level</div>
-        <div class="button-group">
-          <button class="btn difficulty-btn active" data-difficulty="easy">Easy</button>
-          <button class="btn difficulty-btn" data-difficulty="medium">Medium</button>
-          <button class="btn difficulty-btn" data-difficulty="hard">Hard</button>
+        <div class="personal-best">
+          <span class="personal-best-icon">🏆</span>
+          <span>Personal best:</span>
+          <span class="personal-best-value" id="pbWpm">0 WPM</span>
         </div>
       </div>
-      <div class="control-group">
-        <div class="control-label">Test Mode</div>
-        <div class="button-group">
-          <button class="btn mode-btn active" data-mode="timed">Timed (60s)</button>
-          <button class="btn mode-btn" data-mode="passage">Full Text</button>
+    </div>
+
+    <!-- Stats and Controls Section (Combined) -->
+    <div class="stats-controls-wrapper">
+      <!-- Stats Section -->
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-label">WPM:</div>
+          <div class="stat-value wpm" id="wpmDisplay">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Accuracy:</div>
+          <div class="stat-value accuracy" id="accuracyDisplay">0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Time:</div>
+          <div class="stat-value time" id="timeDisplay">0:00</div>
+        </div>
+      </div>
+
+      <!-- Controls Section -->
+      <div class="controls">
+        <div class="control-group">
+          <div class="control-label">Difficulty:</div>
+          <div class="button-group">
+            <button class="btn difficulty-btn active" data-difficulty="easy">Easy</button>
+            <button class="btn difficulty-btn" data-difficulty="medium">Medium</button>
+            <button class="btn difficulty-btn" data-difficulty="hard">Hard</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Mode:</div>
+          <div class="button-group">
+            <button class="btn mode-btn active" data-mode="timed">Timed (60s)</button>
+            <button class="btn mode-btn" data-mode="passage">Passage</button>
+          </div>
         </div>
       </div>
     </div>
@@ -843,10 +929,8 @@
 
     <!-- Start Button Container -->
     <div class="start-button-container" id="startContainer">
-      <button class="start-button" id="startBtn">
-        <span>Start Typing Test</span>
-      </button>
-      <p class="hint">Press any key or click to begin</p>
+      <button class="start-button" id="startBtn">Start Typing Test</button>
+      <p class="hint">Click the text and start typing or press any key</p>
     </div>
 
     <!-- Results Container -->
@@ -868,7 +952,7 @@
         </div>
       </div>
       <div>
-        <button class="go-again-button" id="goAgainBtn">Try Again</button>
+        <button class="go-again-button" id="goAgainBtn">Restart Test ↻</button>
         <button class="reset-button" id="resetBtn">Change Settings</button>
       </div>
     </div>
