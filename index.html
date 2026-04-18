@@ -89,6 +89,16 @@
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      flex-direction: column;
+    }
+
+    .main-wrapper {
+      display: flex;
+      gap: var(--spacing-md);
+      width: 100%;
+      max-width: 1400px;
+      position: relative;
+      z-index: 1;
     }
 
     body::before {
@@ -124,23 +134,309 @@
       border: 1px solid rgba(99, 102, 241, 0.1); /* Subtle border */
       border-radius: var(--radius-lg);
       padding: var(--spacing-lg);
-      max-width: 950px;
-      width: 100%;
+      flex: 1;
+      min-height: 600px;
       position: relative;
-      z-index: 1;
       box-shadow: var(--shadow-xl);
       animation: slideIn 0.6s ease-out;
     }
 
-    @keyframes slideIn {
+    /* ===== Sidebar ===== */
+    .sidebar {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(99, 102, 241, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      width: 280px;
+      min-height: 600px;
+      box-shadow: var(--shadow-xl);
+      animation: slideIn 0.6s ease-out 0.1s backwards;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .sidebar-section h3 {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .stat-card {
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px solid rgba(99, 102, 241, 0.1);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .stat-card:hover {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .stat-card-label {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .stat-card-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .difficulty-section,
+    .mode-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .difficulty-section label,
+    .mode-section label {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-buttons {
+      flex-direction: column;
+    }
+
+    .sidebar-buttons .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .settings-btn {
+      width: 100%;
+      padding: 10px 16px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Sora', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .settings-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    /* ===== Modal Styles ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: rgba(26, 26, 26, 0.95);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      max-width: 450px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+      padding-bottom: var(--spacing-md);
+    }
+
+    .modal-header h2 {
+      font-size: 22px;
+      color: var(--color-text);
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 32px;
+      color: var(--color-text-tertiary);
+      cursor: pointer;
+      transition: color 0.25s ease;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+    }
+
+    .modal-close:hover {
+      color: var(--color-text);
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .settings-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .settings-group label {
+      font-size: 13px;
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .language-buttons,
+    .duration-buttons {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    .lang-btn,
+    .duration-btn {
+      flex: 1;
+      min-width: 90px;
+      padding: 10px 16px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Sora', sans-serif;
+    }
+
+    .lang-btn:hover,
+    .duration-btn:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      color: var(--color-text);
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    .lang-btn.active,
+    .duration-btn.active {
+      background: rgba(99, 102, 241, 0.25);
+      border-color: var(--color-primary);
+      color: var(--color-primary-light);
+      font-weight: 600;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.25);
+    }
+
+    .custom-duration {
+      display: flex;
+    }
+
+    .custom-duration input {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(99, 102, 241, 0.05);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      font-size: 13px;
+      font-family: 'Sora', sans-serif;
+      transition: all 0.25s ease;
+    }
+
+    .custom-duration input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    .custom-duration input::placeholder {
+      color: var(--color-text-tertiary);
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: var(--spacing-sm);
+      justify-content: flex-end;
+    }
+
+    .modal-btn-primary {
+      padding: 10px 32px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1.5px solid rgba(99, 102, 241, 0.4);
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Sora', sans-serif;
+    }
+
+    .modal-btn-primary:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
     }
 
     /* ===== Header ===== */
@@ -231,31 +527,36 @@
     }
 
     /* ===== Stats Section (Horizontal) ===== */
-    .stats {
+    .stats-display {
       display: flex;
-      gap: var(--spacing-lg);
+      gap: var(--spacing-md);
       align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-xl);
+      padding: var(--spacing-md);
+      border-bottom: 1px solid rgba(99, 102, 241, 0.1);
       flex-wrap: wrap;
     }
 
     .stat-item {
       display: flex;
       align-items: center;
-      gap: var(--spacing-sm);
+      gap: var(--spacing-xs);
     }
 
     .stat-label {
       font-size: 12px;
       color: var(--color-text-tertiary);
       font-weight: 500;
-      text-transform: capitalize;
+      text-transform: uppercase;
     }
 
     .stat-value {
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
       color: var(--color-primary);
       font-family: 'Sora', monospace;
+      min-width: 60px;
     }
 
     .stat-value.wpm {
@@ -669,6 +970,28 @@
     }
 
     /* ===== Responsive Design ===== */
+    @media (max-width: 1024px) {
+      .main-wrapper {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+      }
+
+      .sidebar-content {
+        flex-direction: row;
+        gap: var(--spacing-lg);
+        flex-wrap: wrap;
+      }
+
+      .sidebar-section {
+        flex: 1;
+        min-width: 150px;
+      }
+    }
+
     @media (max-width: 768px) {
       :root {
         --spacing-lg: 1.5rem;
@@ -677,11 +1000,21 @@
 
       body {
         padding: var(--spacing-sm);
+        flex-direction: column;
+      }
+
+      .main-wrapper {
+        flex-direction: column-reverse;
       }
 
       .container {
         padding: var(--spacing-md);
         border-radius: var(--radius-md);
+        min-height: auto;
+      }
+
+      .sidebar {
+        min-height: auto;
       }
 
       .header {
@@ -701,7 +1034,7 @@
         align-items: center;
       }
 
-      .stats {
+      .stats-display {
         gap: var(--spacing-sm);
       }
 
@@ -711,10 +1044,6 @@
 
       .stat-value {
         font-size: 28px;
-      }
-
-      .controls {
-        gap: var(--spacing-md);
       }
 
       .passage {
@@ -744,6 +1073,11 @@
       .reset-button {
         font-size: 15px;
         padding: 11px 24px;
+      }
+
+      .modal-content {
+        max-width: 90%;
+        width: 100%;
       }
     }
 
@@ -865,109 +1199,232 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header Section -->
-    <div class="header">
-      <div>
-        <div class="logo">
-          <span class="logo-icon">⌨️</span>
-          <span>Typing Speed Test</span>
-        </div>
-        <div class="logo-subtitle">Type as fast as you can in 60 seconds</div>
+  <!-- Settings Modal -->
+  <div class="modal" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="settingsTitle">Settings</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
       </div>
-      <div class="header-info">
-        <div class="personal-best">
-          <span class="personal-best-icon">🏆</span>
-          <span>Personal best:</span>
-          <span class="personal-best-value" id="pbWpm">0 WPM</span>
+      <div class="modal-body">
+        <!-- Language Selection -->
+        <div class="settings-group">
+          <label id="langLabel">Language / Язык / Dil</label>
+          <div class="language-buttons">
+            <button class="lang-btn active" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="ru">Русский</button>
+            <button class="lang-btn" data-lang="tk">Türkmençe</button>
+          </div>
         </div>
+
+        <!-- Duration Selection -->
+        <div class="settings-group">
+          <label id="durationLabel">Test Duration (seconds)</label>
+          <div class="duration-buttons">
+            <button class="duration-btn" data-duration="30">30s</button>
+            <button class="duration-btn active" data-duration="60">60s</button>
+            <button class="duration-btn" data-duration="90">90s</button>
+            <button class="duration-btn" data-duration="120">2 min</button>
+          </div>
+          <div class="custom-duration">
+            <input type="number" id="customDuration" min="10" max="300" placeholder="Custom (10-300s)" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn-primary" id="modalConfirm" class="modal-btn-confirm">OK</button>
       </div>
     </div>
+  </div>
 
-    <!-- Stats and Controls Section (Combined) -->
-    <div class="stats-controls-wrapper">
+  <div class="main-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <h3 id="statsLabel">Statistics</h3>
+          <div class="stat-card">
+            <div class="stat-card-label" id="pbLabel">Personal Best</div>
+            <div class="stat-card-value" id="pbWpm">0 WPM</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-label" id="testTimeLabel">Test Duration</div>
+            <div class="stat-card-value" id="testDurationDisplay">60s</div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 id="controlsLabel">Controls</h3>
+          <div class="difficulty-section">
+            <label id="diffLabel">Difficulty</label>
+            <div class="button-group sidebar-buttons">
+              <button class="btn difficulty-btn active" data-difficulty="easy">Easy</button>
+              <button class="btn difficulty-btn" data-difficulty="medium">Medium</button>
+              <button class="btn difficulty-btn" data-difficulty="hard">Hard</button>
+            </div>
+          </div>
+          <div class="mode-section">
+            <label id="modeLabel">Mode</label>
+            <div class="button-group sidebar-buttons">
+              <button class="btn mode-btn active" data-mode="timed">Timed</button>
+              <button class="btn mode-btn" data-mode="passage">Passage</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="settings-btn" id="settingsBtn">⚙️ <span id="settingsLabel">Settings</span></button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Header Section -->
+      <div class="header">
+        <div>
+          <div class="logo">
+            <span class="logo-icon">⌨️</span>
+            <span id="appTitle">Typing Speed Test</span>
+          </div>
+          <div class="logo-subtitle" id="subtitle">Type as fast as you can</div>
+        </div>
+      </div>
+
       <!-- Stats Section -->
-      <div class="stats">
+      <div class="stats-display">
         <div class="stat-item">
-          <div class="stat-label">WPM:</div>
+          <div class="stat-label">WPM</div>
           <div class="stat-value wpm" id="wpmDisplay">0</div>
         </div>
         <div class="stat-item">
-          <div class="stat-label">Accuracy:</div>
+          <div class="stat-label">Accuracy</div>
           <div class="stat-value accuracy" id="accuracyDisplay">0%</div>
         </div>
         <div class="stat-item">
-          <div class="stat-label">Time:</div>
+          <div class="stat-label">Time</div>
           <div class="stat-value time" id="timeDisplay">0:00</div>
         </div>
       </div>
 
-      <!-- Controls Section -->
-      <div class="controls">
-        <div class="control-group">
-          <div class="control-label">Difficulty:</div>
-          <div class="button-group">
-            <button class="btn difficulty-btn active" data-difficulty="easy">Easy</button>
-            <button class="btn difficulty-btn" data-difficulty="medium">Medium</button>
-            <button class="btn difficulty-btn" data-difficulty="hard">Hard</button>
+      <!-- Passage Container -->
+      <div class="passage-container">
+        <div class="passage" id="passageDisplay" role="region" aria-label="Typing area"></div>
+      </div>
+
+      <!-- Start Button Container -->
+      <div class="start-button-container" id="startContainer">
+        <button class="start-button" id="startBtn" data-lang="start">Start Typing Test</button>
+        <p class="hint" id="hint">Click the text and start typing</p>
+      </div>
+
+      <!-- Results Container -->
+      <div class="results-container" id="resultsContainer">
+        <div class="results-header" id="completeLabel">Test Complete!</div>
+        <div class="results-message" id="resultsMessage">Great effort! Keep practicing to improve.</div>
+        <div class="results-stats">
+          <div class="results-stat">
+            <div class="results-stat-value" id="finalWpm">0</div>
+            <div class="results-stat-label" id="wpmLabelResult">WPM</div>
+          </div>
+          <div class="results-stat">
+            <div class="results-stat-value" id="finalAccuracy">0%</div>
+            <div class="results-stat-label" id="accuracyLabelResult">Accuracy</div>
+          </div>
+          <div class="results-stat">
+            <div class="results-stat-value" id="finalChars">0</div>
+            <div class="results-stat-label" id="charsLabelResult">Correct Chars</div>
           </div>
         </div>
-        <div class="control-group">
-          <div class="control-label">Mode:</div>
-          <div class="button-group">
-            <button class="btn mode-btn active" data-mode="timed">Timed (60s)</button>
-            <button class="btn mode-btn" data-mode="passage">Passage</button>
-          </div>
+        <div>
+          <button class="go-again-button" id="goAgainBtn">Restart Test ↻</button>
+          <button class="reset-button" id="resetBtn">Change Settings</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Passage Container -->
-    <div class="passage-container">
-      <div class="passage" id="passageDisplay" role="region" aria-label="Typing area"></div>
-    </div>
-
-    <!-- Start Button Container -->
-    <div class="start-button-container" id="startContainer">
-      <button class="start-button" id="startBtn">Start Typing Test</button>
-      <p class="hint">Click the text and start typing or press any key</p>
-    </div>
-
-    <!-- Results Container -->
-    <div class="results-container" id="resultsContainer">
-      <div class="results-header">Test Complete!</div>
-      <div class="results-message" id="resultsMessage">Great effort! Keep practicing to improve.</div>
-      <div class="results-stats">
-        <div class="results-stat">
-          <div class="results-stat-value" id="finalWpm">0</div>
-          <div class="results-stat-label">WPM</div>
-        </div>
-        <div class="results-stat">
-          <div class="results-stat-value" id="finalAccuracy">0%</div>
-          <div class="results-stat-label">Accuracy</div>
-        </div>
-        <div class="results-stat">
-          <div class="results-stat-value" id="finalChars">0</div>
-          <div class="results-stat-label">Correct Chars</div>
-        </div>
-      </div>
-      <div>
-        <button class="go-again-button" id="goAgainBtn">Restart Test ↻</button>
-        <button class="reset-button" id="resetBtn">Change Settings</button>
       </div>
     </div>
   </div>
 
   <script>
-    // ===== Advanced Typing Speed Test Application =====
-    
+    // ===== Translations =====
+    const translations = {
+      en: {
+        appTitle: 'Typing Speed Test',
+        subtitle: 'Type as fast as you can',
+        statsLabel: 'Statistics',
+        pbLabel: 'Personal Best',
+        testTimeLabel: 'Test Duration',
+        controlsLabel: 'Controls',
+        diffLabel: 'Difficulty',
+        modeLabel: 'Mode',
+        settingsLabel: 'Settings',
+        settingsTitle: 'Settings',
+        langLabel: 'Language',
+        durationLabel: 'Test Duration (seconds)',
+        startBtn: 'Start Typing Test',
+        hint: 'Click the text and start typing',
+        completeLabel: 'Test Complete!',
+        wpmLabelResult: 'WPM',
+        accuracyLabelResult: 'Accuracy',
+        charsLabelResult: 'Correct Chars',
+        goAgainBtn: 'Restart Test ↻',
+        changeSettingsBtn: 'Change Settings'
+      },
+      ru: {
+        appTitle: 'Тест Скорости Печати',
+        subtitle: 'Печатайте как можно быстрее',
+        statsLabel: 'Статистика',
+        pbLabel: 'Лучший Результат',
+        testTimeLabel: 'Длительность',
+        controlsLabel: 'Управление',
+        diffLabel: 'Сложность',
+        modeLabel: 'Режим',
+        settingsLabel: 'Настройки',
+        settingsTitle: 'Настройки',
+        langLabel: 'Язык',
+        durationLabel: 'Длительность теста (секунды)',
+        startBtn: 'Начать Тест',
+        hint: 'Нажмите на текст и начните печатать',
+        completeLabel: 'Тест Завершён!',
+        wpmLabelResult: 'СПМ',
+        accuracyLabelResult: 'Точность',
+        charsLabelResult: 'Верных Символов',
+        goAgainBtn: 'Попробовать Снова ↻',
+        changeSettingsBtn: 'Изменить Настройки'
+      },
+      tk: {
+        appTitle: 'Çap Tizligini Synamak',
+        subtitle: 'Mümkin boldugyça çap ediň',
+        statsLabel: 'Statistika',
+        pbLabel: 'Iň Ýokary Netije',
+        testTimeLabel: 'Wagt',
+        controlsLabel: 'Dolandyryş',
+        diffLabel: 'Çetin Derejesi',
+        modeLabel: 'Режim',
+        settingsLabel: 'Sazlamalar',
+        settingsTitle: 'Sazlamalar',
+        langLabel: 'Dil',
+        durationLabel: 'Synaw wagty (sekund)',
+        startBtn: 'Synawa Başla',
+        hint: 'Tekste basyň we çap ediň',
+        completeLabel: 'Synaw Tamamlandy!',
+        wpmLabelResult: 'ÇPM',
+        accuracyLabelResult: 'Hasyllygy',
+        charsLabelResult: 'Dogry Nyşan',
+        goAgainBtn: 'Gaýtadan Synayň ↻',
+        changeSettingsBtn: 'Sazlamalary Üýtget'
+      }
+    };
+
     class TypingSpeedTest {
       constructor() {
+        this.currentLanguage = localStorage.getItem('language') || 'en';
         this.initializeState();
         this.cacheElements();
+        this.setupModal();
         this.attachEventListeners();
         this.loadPersonalBest();
-        this.loadPassage(); // Load initial passage on start
+        this.loadPassage();
+        this.updateUI();
       }
 
       initializeState() {
@@ -982,7 +1439,7 @@
           startTime: null,
           timerInterval: null,
           personalBest: 0,
-          testDuration: 60000, // 60 seconds for timed mode
+          testDuration: (parseInt(localStorage.getItem('testDuration')) || 60) * 1000,
           stats: {
             wpm: 0,
             accuracy: 0,
@@ -1002,6 +1459,7 @@
           accuracyDisplay: document.getElementById('accuracyDisplay'),
           timeDisplay: document.getElementById('timeDisplay'),
           pbWpmDisplay: document.getElementById('pbWpm'),
+          testDurationDisplay: document.getElementById('testDurationDisplay'),
           difficultyBtns: document.querySelectorAll('.difficulty-btn'),
           modeBtns: document.querySelectorAll('.mode-btn'),
           goAgainBtn: document.getElementById('goAgainBtn'),
@@ -1009,8 +1467,32 @@
           resultsMessage: document.getElementById('resultsMessage'),
           finalWpm: document.getElementById('finalWpm'),
           finalAccuracy: document.getElementById('finalAccuracy'),
-          finalChars: document.getElementById('finalChars')
+          finalChars: document.getElementById('finalChars'),
+          settingsBtn: document.getElementById('settingsBtn'),
+          settingsModal: document.getElementById('settingsModal'),
+          modalClose: document.getElementById('modalClose'),
+          modalConfirm: document.getElementById('modalConfirm'),
+          langBtns: document.querySelectorAll('.lang-btn'),
+          durationBtns: document.querySelectorAll('.duration-btn'),
+          customDuration: document.getElementById('customDuration')
         };
+      }
+
+      setupModal() {
+        // Set active language button
+        this.elements.langBtns.forEach(btn => {
+          if (btn.dataset.lang === this.currentLanguage) {
+            btn.classList.add('active');
+          }
+        });
+
+        // Set active duration button
+        const currentDurationSecs = this.state.testDuration / 1000;
+        this.elements.durationBtns.forEach(btn => {
+          if (parseInt(btn.dataset.duration) === currentDurationSecs) {
+            btn.classList.add('active');
+          }
+        });
       }
 
       attachEventListeners() {
@@ -1026,22 +1508,120 @@
 
         // Start test
         this.elements.startBtn.addEventListener('click', () => this.startTest());
-        // Allow starting by typing directly into the passage area
-        this.elements.passageDisplay.addEventListener('keydown', (e) => {
-          if (!this.state.isTestRunning) {
-            e.preventDefault(); // Prevent first key from being processed immediately by input logic
-            this.startTest();
-            // Simulate key press after starting the test to type the first character
-            setTimeout(() => this.handleKeyPress(e), 0);
-          }
-        });
 
         // End test buttons
         this.elements.goAgainBtn.addEventListener('click', () => this.startTest());
         this.elements.resetBtn.addEventListener('click', () => this.resetTest());
 
-        // Global keyboard shortcuts
+        // Settings modal
+        this.elements.settingsBtn.addEventListener('click', () => this.openModal());
+        this.elements.modalClose.addEventListener('click', () => this.closeModal());
+        this.elements.modalConfirm.addEventListener('click', () => this.saveSettings());
+
+        // Language selection in modal
+        this.elements.langBtns.forEach(btn => {
+          btn.addEventListener('click', () => this.selectLanguage(btn));
+        });
+
+        // Duration selection in modal
+        this.elements.durationBtns.forEach(btn => {
+          btn.addEventListener('click', () => this.selectDuration(btn));
+        });
+
+        // Custom duration input
+        this.elements.customDuration.addEventListener('change', (e) => {
+          const value = parseInt(e.target.value);
+          if (value >= 10 && value <= 300) {
+            this.elements.durationBtns.forEach(btn => btn.classList.remove('active'));
+            this.elements.customDuration.dataset.selected = value;
+          }
+        });
+
+        // Global keyboard
         document.addEventListener('keydown', (e) => this.handleGlobalKeyboardShortcuts(e));
+
+        // Click outside modal to close
+        this.elements.settingsModal.addEventListener('click', (e) => {
+          if (e.target === this.elements.settingsModal) {
+            this.closeModal();
+          }
+        });
+      }
+
+      selectLanguage(btn) {
+        this.elements.langBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.currentLanguage = btn.dataset.lang;
+      }
+
+      selectDuration(btn) {
+        this.elements.durationBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.elements.customDuration.value = '';
+        delete this.elements.customDuration.dataset.selected;
+      }
+
+      openModal() {
+        this.elements.settingsModal.classList.add('show');
+      }
+
+      closeModal() {
+        this.elements.settingsModal.classList.remove('show');
+      }
+
+      saveSettings() {
+        localStorage.setItem('language', this.currentLanguage);
+        
+        // Save duration
+        let duration = 60;
+        const activeBtn = document.querySelector('.duration-btn.active');
+        if (activeBtn) {
+          duration = parseInt(activeBtn.dataset.duration);
+        } else if (this.elements.customDuration.dataset.selected) {
+          duration = parseInt(this.elements.customDuration.dataset.selected);
+        } else if (this.elements.customDuration.value) {
+          const value = parseInt(this.elements.customDuration.value);
+          if (value >= 10 && value <= 300) {
+            duration = value;
+          }
+        }
+        
+        localStorage.setItem('testDuration', duration);
+        this.state.testDuration = duration * 1000;
+        
+        this.closeModal();
+        this.updateUI();
+      }
+
+      updateUI() {
+        const t = translations[this.currentLanguage];
+        
+        // Update all text elements
+        document.getElementById('appTitle').textContent = t.appTitle;
+        document.getElementById('subtitle').textContent = t.subtitle;
+        document.getElementById('statsLabel').textContent = t.statsLabel;
+        document.getElementById('pbLabel').textContent = t.pbLabel;
+        document.getElementById('testTimeLabel').textContent = t.testTimeLabel;
+        document.getElementById('controlsLabel').textContent = t.controlsLabel;
+        document.getElementById('diffLabel').textContent = t.diffLabel;
+        document.getElementById('modeLabel').textContent = t.modeLabel;
+        document.getElementById('settingsBtn').innerHTML = `⚙️ <span>${t.settingsLabel}</span>`;
+        document.getElementById('settingsTitle').textContent = t.settingsTitle;
+        document.getElementById('langLabel').textContent = t.langLabel;
+        document.getElementById('durationLabel').textContent = t.durationLabel;
+        document.getElementById('startBtn').textContent = t.startBtn;
+        document.getElementById('hint').textContent = t.hint;
+        document.getElementById('completeLabel').textContent = t.completeLabel;
+        document.getElementById('wpmLabelResult').textContent = t.wpmLabelResult;
+        document.getElementById('accuracyLabelResult').textContent = t.accuracyLabelResult;
+        document.getElementById('charsLabelResult').textContent = t.charsLabelResult;
+        document.getElementById('goAgainBtn').textContent = t.goAgainBtn;
+        document.getElementById('resetBtn').textContent = t.changeSettingsBtn;
+        
+        // Update test duration display
+        const durationSecs = this.state.testDuration / 1000;
+        document.getElementById('testDurationDisplay').textContent = 
+          durationSecs >= 60 ? Math.round(durationSecs / 60) + 'm' : durationSecs + 's';
       }
 
       selectDifficulty(btn) {
@@ -1050,7 +1630,7 @@
         this.elements.difficultyBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.state.currentDifficulty = btn.dataset.difficulty;
-        this.resetTest(); // Reset to load new passage for selected difficulty
+        this.resetTest();
       }
 
       selectMode(btn) {
@@ -1059,12 +1639,12 @@
         this.elements.modeBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.state.currentMode = btn.dataset.mode;
-        this.resetTest(); // Reset to prepare for new mode
+        this.resetTest();
       }
 
       async loadPassage() {
         try {
-          const response = await fetch('data.json'); // Adjusted path for local data.json
+          const response = await fetch('data.json');
           if (!response.ok) throw new Error('Failed to load passage');
           
           const data = await response.json();
@@ -1079,7 +1659,6 @@
           this.renderPassage();
         } catch (error) {
           console.error('Error loading passage:', error);
-          // Fallback passage if loading fails
           this.state.currentPassage = 'The quick brown fox jumps over the lazy dog. Technology is advancing rapidly every single day.';
           this.renderPassage();
         }
@@ -1100,6 +1679,7 @@
           html += `<span class="${className}">${char}</span>`;
         }
         this.elements.passageDisplay.innerHTML = html;
+        
         // Scroll to current character if it's off-screen
         const currentSpan = this.elements.passageDisplay.querySelector('.current');
         if (currentSpan) {
@@ -1123,8 +1703,8 @@
         this.elements.startContainer.classList.add('hidden');
         this.elements.resultsContainer.classList.remove('show');
 
-        this.loadPassage(); // Load a new passage for the test
-        this.elements.passageDisplay.focus(); // Ensure passage area is focused for typing
+        this.loadPassage();
+        this.elements.passageDisplay.focus();
 
         // Bind the handler and store reference
         this.keyPressHandler = (e) => this.handleKeyPress(e);
@@ -1135,8 +1715,8 @@
 
         // Set test duration for timed mode
         if (this.state.currentMode === 'timed') {
-          setTimeout(() => {
-            if (this.state.isTestRunning) { // Only end if still running
+          this.testTimeoutId = setTimeout(() => {
+            if (this.state.isTestRunning) {
               this.endTest();
             }
           }, this.state.testDuration);
@@ -1149,22 +1729,21 @@
         const key = e.key;
 
         if (key === 'Backspace') {
-          e.preventDefault(); // Prevent browser back navigation
+          e.preventDefault();
           this.state.userInput = this.state.userInput.slice(0, -1);
         } else if (key === 'Escape') {
           e.preventDefault();
           this.endTest();
           return;
-        } else if (key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) { // Only allow single character keys
+        } else if (key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
           this.state.userInput += key;
 
-          // Check if passage mode is complete
           if (this.state.currentMode === 'passage' && this.state.userInput.length === this.state.currentPassage.length) {
             this.endTest();
             return;
           }
         } else {
-          return; // Ignore other keys like Shift, Alt, Ctrl, F1-F12 etc.
+          return;
         }
 
         this.renderPassage();
@@ -1172,7 +1751,6 @@
       }
 
       handleGlobalKeyboardShortcuts(e) {
-        // Alt+1 = Easy, Alt+2 = Medium, Alt+3 = Hard
         if (!this.state.isTestRunning && e.altKey) {
           if (e.key === '1') {
             e.preventDefault();
@@ -1190,15 +1768,12 @@
       updateStats() {
         if (!this.state.startTime) return;
 
-        const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 0.1); // Avoid division by zero
+        const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 0.1);
         const minutes = timeInSeconds / 60;
 
-        // Calculate WPM (Words Per Minute)
-        // A 'word' is typically considered 5 characters (including spaces) for WPM calculation
         const wordsTyped = this.state.userInput.length / 5;
         const wpm = Math.round(wordsTyped / minutes);
 
-        // Calculate accuracy
         let correctChars = 0;
         for (let i = 0; i < this.state.userInput.length; i++) {
           if (i < this.state.currentPassage.length && this.state.userInput[i] === this.state.currentPassage[i]) {
@@ -1212,7 +1787,7 @@
         this.state.stats.wpm = wpm;
         this.state.stats.accuracy = accuracy;
         this.state.stats.correctChars = correctChars;
-        this.state.stats.totalChars = this.state.userInput.length; // This counts all typed characters, correct or incorrect
+        this.state.stats.totalChars = this.state.userInput.length;
 
         this.elements.wpmDisplay.textContent = wpm;
         this.elements.accuracyDisplay.textContent = accuracy + '%';
@@ -1233,11 +1808,11 @@
 
         this.state.isTestRunning = false;
         clearInterval(this.state.timerInterval);
+        if (this.testTimeoutId) clearTimeout(this.testTimeoutId);
         if (this.keyPressHandler) {
           document.removeEventListener('keydown', this.keyPressHandler);
         }
 
-        // Calculate final stats (re-calculate to ensure accuracy at end)
         const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 0.1);
         const minutes = timeInSeconds / 60;
         const words = this.state.userInput.length / 5;
@@ -1253,7 +1828,6 @@
           ? Math.round((correctChars / this.state.userInput.length) * 100) 
           : 0;
 
-        // Update personal best
         const isNewRecord = finalWpm > this.state.personalBest;
         if (isNewRecord) {
           this.state.personalBest = finalWpm;
@@ -1261,13 +1835,12 @@
           this.elements.pbWpmDisplay.textContent = finalWpm + ' WPM';
         }
 
-        // Update results display
         this.elements.finalWpm.textContent = finalWpm;
         this.elements.finalAccuracy.textContent = finalAccuracy + '%';
         this.elements.finalChars.textContent = correctChars;
 
-        // Update results message
-        const message = this.generateResultsMessage(finalWpm, finalAccuracy, isNewRecord);
+        const t = translations[this.currentLanguage];
+        const message = this.generateResultsMessage(finalWpm, finalAccuracy, isNewRecord, t);
         this.elements.resultsMessage.textContent = message;
         if (isNewRecord) {
           this.elements.resultsMessage.classList.add('pb-message');
@@ -1275,22 +1848,21 @@
           this.elements.resultsMessage.classList.remove('pb-message');
         }
 
-        // Show results
         this.elements.startContainer.classList.add('hidden');
         this.elements.resultsContainer.classList.add('show');
       }
 
-      generateResultsMessage(wpm, accuracy, isNewRecord) {
+      generateResultsMessage(wpm, accuracy, isNewRecord, t) {
         if (isNewRecord) {
-          return `🎉 New Personal Record! ${wpm} WPM with ${accuracy}% accuracy!`;
+          return `🎉 ${this.currentLanguage === 'ru' ? 'Новый рекорд!' : this.currentLanguage === 'tk' ? 'Täze rekord!' : 'New Record!'} ${wpm} WPM, ${accuracy}% ${t.accuracyLabelResult.toLowerCase()}!`;
         } else if (wpm > 60) {
-          return 'Excellent! Keep pushing to beat your high score.';
+          return this.currentLanguage === 'ru' ? 'Отлично! Продолжай в том же духе.' : this.currentLanguage === 'tk' ? 'Oňat! Ýokarda barmagiň.' : 'Excellent! Keep pushing.';
         } else if (wpm > 40) {
-          return 'Great work! You\'re improving. Keep practicing!';
+          return this.currentLanguage === 'ru' ? 'Хорошо! Ты улучшаешься.' : this.currentLanguage === 'tk' ? 'Gowy! Ýakşarýarsan.' : 'Great work! Keep practicing.';
         } else if (wpm > 20) {
-          return 'Good effort! Practice makes perfect.';
+          return this.currentLanguage === 'ru' ? 'Хороший старт! Продолжай тренироваться.' : this.currentLanguage === 'tk' ? 'Gowy başlangyt! Praktika edin.' : 'Good effort! Practice makes perfect.';
         } else {
-          return 'Nice try! Keep practicing to improve your speed.';
+          return this.currentLanguage === 'ru' ? 'Продолжай тренироваться!' : this.currentLanguage === 'tk' ? 'Pratika etmegiň!' : 'Keep practicing to improve!';
         }
       }
 
@@ -1300,6 +1872,7 @@
         this.state.timeElapsed = 0;
         this.state.startTime = null;
         clearInterval(this.state.timerInterval);
+        if (this.testTimeoutId) clearTimeout(this.testTimeoutId);
 
         this.elements.wpmDisplay.textContent = '0';
         this.elements.accuracyDisplay.textContent = '0%';
@@ -1309,8 +1882,8 @@
         this.elements.resultsContainer.classList.remove('show');
         this.elements.resultsMessage.classList.remove('pb-message');
 
-        this.elements.passageDisplay.innerHTML = ''; // Clear passage content
-        this.loadPassage(); // Load a new passage or re-render current one
+        this.elements.passageDisplay.innerHTML = '';
+        this.loadPassage();
 
         if (this.keyPressHandler) {
           document.removeEventListener('keydown', this.keyPressHandler);
@@ -1328,7 +1901,6 @@
       }
     }
 
-    // Initialize the application
     let app;
     document.addEventListener('DOMContentLoaded', () => {
       app = new TypingSpeedTest();
