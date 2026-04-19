@@ -1768,7 +1768,7 @@
       updateStats() {
         if (!this.state.startTime) return;
 
-        const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 0.1);
+        const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 1);
         const minutes = timeInSeconds / 60;
 
         const wordsTyped = this.state.userInput.length / 5;
@@ -1813,7 +1813,7 @@
           document.removeEventListener('keydown', this.keyPressHandler);
         }
 
-        const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 0.1);
+        const timeInSeconds = Math.max((Date.now() - this.state.startTime) / 1000, 1);
         const minutes = timeInSeconds / 60;
         const words = this.state.userInput.length / 5;
         const finalWpm = Math.round(words / minutes);
